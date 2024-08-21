@@ -6,11 +6,11 @@ function Navbar() {
     <div className="h-9 border-b shadow flex items-center ">
       <Container>
         <div className="flex justify-between flex-row-reverse ">
-          <ul className="flex gap-4">
-            <li>
+          <ul className="flex gap-4 flex-row-reverse">
+            <li className="ml-4 ">
               <Link to="/">خانه</Link>
             </li>
-            <li>
+            <li className="ml-4 ">
               <Link to="/store">فروشگاه</Link>
             </li>
           </ul>
