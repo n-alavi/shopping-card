@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import Container from "../../Components/Navbar/container/Container";
+import Button from "../../Components/button/button";
 
 function ProductPage() {
   const params = useParams();
@@ -27,9 +28,7 @@ function ProductPage() {
               className="rounded"
               src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Highlight-Surface-Laptop-Go-3-001-3000x1682:VP2-859x540"
             />
-            <div>
-              <button>add to cart</button>
-            </div>
+            <Button variant="secondary"> add to cart</Button>
           </div>
         </div>
       </Container>
