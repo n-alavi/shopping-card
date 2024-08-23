@@ -15,7 +15,7 @@ function Navbar() {
             </li>
           </ul>
           <div>
-            <Link to="/card">
+            <Link to="/cart">
               <button>سبد خرید</button>
             </Link>
           </div>
