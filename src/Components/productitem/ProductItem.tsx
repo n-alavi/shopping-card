@@ -1,4 +1,8 @@
-function ProductItem() {
+import { Products } from "../../types/server";
+
+type ProductItem = Products;
+
+function ProductItem({}: ProductItem) {
   return (
     <div className="shadow border rounded">
       <img
