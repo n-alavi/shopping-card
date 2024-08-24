@@ -1,14 +1,14 @@
-export interface Products {
+export interface Product {
   id: string;
   title: string;
   price: number;
   description: string;
   category: string;
   image: string;
-  rating: Rating;
+  rating: ProductRating;
 }
 
-export interface ProductsRating {
+export interface ProductRating {
   rate: number;
   count: number;
 }
