@@ -22,6 +22,23 @@ export const useShoppingCartContext = () => {
 export function ShoppingCartProvider({ children }: ShoppingCartProvider) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
+  const handleIncreaseProductQty = (id: number) => {
+    setCartItems((currentItems) => {
+      let selectedItem = currentItems.find((item) => item.id == id);
+      if (selectedItem == null) {
+        return [...currentItems, { id: id, qty: 1 }];
+      } else {
+        return currentItems.map((item) => {
+          if (item.id == id) {
+            return { ...item, qty: item.qty + 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  };
+
   return (
     <ShoppingCartContext.Provider value={{ cartItems }}>
       {children}
