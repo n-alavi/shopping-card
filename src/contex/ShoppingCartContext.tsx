@@ -15,9 +15,9 @@ interface ShoppingCartContext {
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContext);
 
-export const useShoppingCartContext = {}=>{
-  return useContext (ShoppingCartContext)
-}
+export const useShoppingCartContext = () => {
+  return useContext(ShoppingCartContext);
+};
 
 export function ShoppingCartProvider({ children }: ShoppingCartProvider) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
