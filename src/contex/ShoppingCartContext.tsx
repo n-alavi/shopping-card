@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface ShoppingCartProvider {
   children: React.ReactNode;
@@ -14,6 +14,10 @@ interface ShoppingCartContext {
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContext);
+
+export const useShoppingCartContext = {}=>{
+  return useContext (ShoppingCartContext)
+}
 
 export function ShoppingCartProvider({ children }: ShoppingCartProvider) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
