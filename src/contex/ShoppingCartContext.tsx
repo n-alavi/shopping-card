@@ -12,6 +12,7 @@ interface CartItem {
 interface ShoppingCartContext {
   cartItems: CartItem[];
   handleIncreaseProductQty: (id: number) => void;
+  handleDecreaseProductQty: (id: number) => void;
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -40,9 +41,29 @@ export function ShoppingCartProvider({ children }: ShoppingCartProvider) {
     });
   };
 
+  const handleDecreaseProductQty = (id: number) => {
+    setCartItems((currentItems) => {
+      let selectedItem = currentItems.find((item) => item.id === id);
+
+      // If the selected item exists and its quantity is 1, filter it out.
+      if (selectedItem?.qty === 1) {
+        return currentItems.filter((item) => item.id !== id);
+      } else {
+        // Otherwise, decrease the quantity
+        return currentItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, qty: item.qty - 1 }; // Decrease the quantity
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  };
+
   return (
     <ShoppingCartContext.Provider
-      value={{ cartItems, handleIncreaseProductQty }}
+      value={{ cartItems, handleIncreaseProductQty, handleDecreaseProductQty }}
     >
       {children}
     </ShoppingCartContext.Provider>
