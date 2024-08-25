@@ -7,9 +7,7 @@ interface ShoppingCartContext {
   cartItems: [];
 }
 
-export const ShoppingCartContext = createContext<ShoppingCartContext>({
-  cartItems: [],
-});
+export const ShoppingCartContext = createContext({} as ShoppingCartContext);
 
 export function ShoppingCartProvider({ children }: ShoppingCartProvider) {
   const [cartItems, setCartItems] = useState<[]>([]);
