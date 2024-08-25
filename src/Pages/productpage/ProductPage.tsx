@@ -4,10 +4,13 @@ import Button from "../../Components/button/Button";
 import { useEffect, useState } from "react";
 import { getSingleProduct } from "../../services/api";
 import { Product } from "../../types/server";
+import { useShoppingCartContext } from "../../contex/ShoppingCartContext";
 
 function ProductPage() {
   const params = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product>();
+
+  const { handleIncreaseProductQty } = useShoppingCartContext();
   useEffect(() => {
     getSingleProduct(params.id as string).then((data) => {
       setProduct(data);
@@ -27,8 +30,13 @@ function ProductPage() {
           </div>
           <div className=" col-span-2 bg-sky-200 p-4">
             <img className="rounded" src={product?.image} />
-            <Button className="w-full mt-2" variant="primary">
-              {" "}
+            <Button
+              onClick={() =>
+                handleIncreaseProductQty(parseInt(params.id as string))
+              }
+              className="w-full mt-2"
+              variant="primary"
+            >
               add to cart
             </Button>
           </div>
