@@ -11,6 +11,7 @@ interface CartItem {
 
 interface ShoppingCartContext {
   cartItems: CartItem[];
+  handleIncreaseProductQty: (id: number) => void;
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -40,7 +41,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProvider) {
   };
 
   return (
-    <ShoppingCartContext.Provider value={{ cartItems }}>
+    <ShoppingCartContext.Provider
+      value={{ cartItems, handleIncreaseProductQty }}
+    >
       {children}
     </ShoppingCartContext.Provider>
   );
