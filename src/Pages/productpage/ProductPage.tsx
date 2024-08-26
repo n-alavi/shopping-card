@@ -15,6 +15,7 @@ function ProductPage() {
     cartItems,
     handleDecreaseProductQty,
     getProductQty,
+    handleRemoveProduct,
   } = useShoppingCartContext();
   useEffect(() => {
     getSingleProduct(params.id as string).then((data) => {
@@ -48,31 +49,42 @@ function ProductPage() {
                 add to cart
               </Button>
             ) : (
-              <div className="grid grid-cols-3">
+              <>
+                <div className="grid grid-cols-3">
+                  <Button
+                    className="w-full mt-2"
+                    variant="primary"
+                    onClick={() =>
+                      handleIncreaseProductQty(parseInt(params.id as string))
+                    }
+                  >
+                    +
+                  </Button>
+
+                  <span className="flex justify-center items-center">
+                    {getProductQty(parseInt(params.id as string))}
+                  </span>
+
+                  <Button
+                    className="w-full mt-2"
+                    variant="primary"
+                    onClick={() =>
+                      handleDecreaseProductQty(parseInt(params.id as string))
+                    }
+                  >
+                    -
+                  </Button>
+                </div>
                 <Button
                   className="w-full mt-2"
-                  variant="primary"
+                  variant="danger"
                   onClick={() =>
-                    handleIncreaseProductQty(parseInt(params.id as string))
+                    handleRemoveProduct(parseInt(params.id as string))
                   }
                 >
-                  +
+                  remove
                 </Button>
-
-                <span className="flex justify-center items-center">
-                  {getProductQty(parseInt(params.id as string))}
-                </span>
-
-                <Button
-                  className="w-full mt-2"
-                  variant="primary"
-                  onClick={() =>
-                    handleDecreaseProductQty(parseInt(params.id as string))
-                  }
-                >
-                  -
-                </Button>
-              </div>
+              </>
             )}
           </div>
         </div>
