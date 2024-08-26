@@ -14,6 +14,7 @@ interface ShoppingCartContext {
   handleIncreaseProductQty: (id: number) => void;
   handleDecreaseProductQty: (id: number) => void;
   getProductQty: (id: number) => number;
+  handleRemoveProduct: (id: number) => void;
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -66,6 +67,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProvider) {
     return cartItems.find((item) => item.id == id)?.qty || 0;
   };
 
+  const handleRemoveProduct = (id: number) => {
+    setCartItems((currentItems) =>
+      currentItems.filter((item) => item.id != id)
+    );
+  };
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -73,6 +80,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProvider) {
         handleIncreaseProductQty,
         handleDecreaseProductQty,
         getProductQty,
+        handleRemoveProduct,
       }}
     >
       {children}
