@@ -36,26 +36,44 @@ function ProductPage() {
           </div>
           <div className=" col-span-2 bg-sky-200 p-4">
             <img className="rounded" src={product?.image} />
-            <Button
-              onClick={() =>
-                handleIncreaseProductQty(parseInt(params.id as string))
-              }
-              className="w-full mt-2"
-              variant="primary"
-            >
-              add to cart
-            </Button>
-            {getProductQty(parseInt(params.id as string))}
 
-            <Button
-              className="w-full mt-2"
-              variant="primary"
-              onClick={() =>
-                handleDecreaseProductQty(parseInt(params.id as string))
-              }
-            >
-              -
-            </Button>
+            {getProductQty(parseInt(params.id as string)) == 0 ? (
+              <Button
+                className="w-full mt-2"
+                variant="primary"
+                onClick={() =>
+                  handleIncreaseProductQty(parseInt(params.id as string))
+                }
+              >
+                add to cart
+              </Button>
+            ) : (
+              <div className="grid grid-cols-3">
+                <Button
+                  className="w-full mt-2"
+                  variant="primary"
+                  onClick={() =>
+                    handleIncreaseProductQty(parseInt(params.id as string))
+                  }
+                >
+                  +
+                </Button>
+
+                <span className="flex justify-center items-center">
+                  {getProductQty(parseInt(params.id as string))}
+                </span>
+
+                <Button
+                  className="w-full mt-2"
+                  variant="primary"
+                  onClick={() =>
+                    handleDecreaseProductQty(parseInt(params.id as string))
+                  }
+                >
+                  -
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </Container>
