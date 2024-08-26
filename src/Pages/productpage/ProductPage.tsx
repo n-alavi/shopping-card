@@ -10,8 +10,12 @@ function ProductPage() {
   const params = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product>();
 
-  const { handleIncreaseProductQty, cartItems, handleDecreaseProductQty } =
-    useShoppingCartContext();
+  const {
+    handleIncreaseProductQty,
+    cartItems,
+    handleDecreaseProductQty,
+    getProductQty,
+  } = useShoppingCartContext();
   useEffect(() => {
     getSingleProduct(params.id as string).then((data) => {
       setProduct(data);
@@ -41,6 +45,7 @@ function ProductPage() {
             >
               add to cart
             </Button>
+            {getProductQty(parseInt(params.id as string))}
 
             <Button
               className="w-full mt-2"
