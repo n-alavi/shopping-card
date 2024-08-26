@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../button/Button";
 import { getSingleProduct } from "../../services/api";
 import { Product } from "../../types/server";
+import { useShoppingCartContext } from "../../contex/ShoppingCartContext";
 
 interface ICartItem {
   id: number;
@@ -9,6 +10,12 @@ interface ICartItem {
 }
 function CartItem({ id, qty }: ICartItem) {
   const [product, setProduct] = useState<Product>();
+
+  const {
+    handleIncreaseProductQty,
+    handleDecreaseProductQty,
+    handleRemoveProduct,
+  } = useShoppingCartContext();
 
   useEffect(() => {
     getSingleProduct(id).then((data) => {
@@ -22,15 +29,27 @@ function CartItem({ id, qty }: ICartItem) {
         <h3 className="text-right">{product?.title}</h3>
 
         <div className="mt-2">
-          <Button className="mr-2" variant="danger">
+          <Button
+            onClick={() => handleRemoveProduct(id)}
+            className="mr-2"
+            variant="danger"
+          >
             remove
           </Button>
 
-          <Button className="mr-2" variant="primary">
+          <Button
+            onClick={() => handleIncreaseProductQty(id)}
+            className="mr-2"
+            variant="primary"
+          >
             +
           </Button>
           <span className="mr-2">{qty}</span>
-          <Button className="mr-2" variant="primary">
+          <Button
+            onClick={() => handleDecreaseProductQty(id)}
+            className="mr-2"
+            variant="primary"
+          >
             -
           </Button>
         </div>
