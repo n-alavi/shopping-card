@@ -3,6 +3,7 @@ import Button from "../button/Button";
 import { getSingleProduct } from "../../services/api";
 import { Product } from "../../types/server";
 import { useShoppingCartContext } from "../../contex/ShoppingCartContext";
+import { Link } from "react-router-dom";
 
 interface ICartItem {
   id: number;
@@ -24,7 +25,10 @@ function CartItem({ id, qty }: ICartItem) {
   }, []);
   return (
     <div className="flex flex-row-reverse mt-4 border-b pb-2">
-      <img className="rounded w-28" src={product?.image} />
+      <Link to={`/product/${id}`}>
+        <img className="rounded w-28" src={product?.image} />
+      </Link>
+
       <div className="mr-4">
         <h3 className="text-right">{product?.title}</h3>
 
