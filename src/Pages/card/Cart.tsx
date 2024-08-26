@@ -11,10 +11,9 @@ function Cart() {
     <div>
       <Container>
         <div className="">
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          {cartItems.map((item) => (
+            <CartItem {...item} />
+          ))}
         </div>
         <div className="text-right bg-slate-200 p-4">
           <p>قیمت کل:2000 تومان</p>
