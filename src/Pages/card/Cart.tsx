@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import Button from "../../Components/button/Button";
 import CartItem from "../../Components/cartitem/CartItem";
 import Container from "../../Components/Navbar/container/Container";
