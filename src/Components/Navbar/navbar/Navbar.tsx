@@ -2,24 +2,60 @@ import { Link } from "react-router-dom";
 import Container from "../container/Container";
 import { useShoppingCartContext } from "../../../contex/ShoppingCartContext";
 import Button from "../../button/Button";
+import { useState } from "react";
 
 function Navbar() {
   const { cartQty, handleLogout } = useShoppingCartContext();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <div className="h-9 border-b shadow flex items-center m-5">
+    <div className="bg-neutral-600 text-white shadow-lg py-2 px-4 w-full rounded-lg">
       <Container>
-        <div className="flex justify-between flex-row-reverse ">
-          <ul className="flex gap-4 flex-row-reverse">
-            <li className="ml-4 ">
-              <Link to="/">خانه</Link>
+        <div className="flex justify-between items-center">
+          {/*  Icon for Mobile */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              className="bi bi-list"
+              viewBox="0 0 16 16"
+              width="24"
+              height="24"
+            >
+              <path
+                fillRule="evenodd"
+                d="M2 3h12a1 1 0 0 1 0 2H2a1 1 0 0 1 0-2zm0 5h12a1 1 0 0 1 0 2H2a1 1 0 0 1 0-2zm0 5h12a1 1 0 0 1 0 2H2a1 1 0 0 1 0-2z"
+              />
+            </svg>
+          </button>
+
+          {/* Desktop Navigation Menu */}
+          <ul className="hidden md:flex gap-6 flex-row-reverse">
+            <li>
+              <Link to="/" className="hover:text-gray-300 transition">
+                Home
+              </Link>
             </li>
-            <li className="ml-4 ">
-              <Link to="/store">فروشگاه</Link>
+            <li>
+              <Link to="/store" className="hover:text-gray-300 transition">
+                Store
+              </Link>
             </li>
           </ul>
+          <img
+            className="w-10 rounded-3xl hidden lg:block md:block"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGoz2N1_48Wjn1VP_XpV-yGRwR5C6uBpqzfw&s"
+          />
+
+          {/* Logout Button and Cart Icon */}
           <div className="relative">
-            <Button onClick={handleLogout}>Logout</Button>
-            <Link to="/cart">
+            <Button onClick={handleLogout} className="hidden md:inline">
+              Logout
+            </Button>
+            <Link to="/cart" className="relative">
               <button>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -38,8 +74,35 @@ function Navbar() {
             </Link>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-2 bg-neutral-700 rounded-lg">
+            <ul className="flex flex-col items-center divide-y divide-gray-500">
+              <li className="py-2">
+                <Link to="/" className="hover:text-gray-300 transition block">
+                  Home
+                </Link>
+              </li>
+              <li className="py-2">
+                <Link
+                  to="/store"
+                  className="hover:text-gray-300 transition block"
+                >
+                  Store
+                </Link>
+              </li>
+              <li className="py-2">
+                <Button onClick={handleLogout} className="w-full text-center">
+                  Logout
+                </Button>
+              </li>
+            </ul>
+          </div>
+        )}
       </Container>
     </div>
   );
 }
+
 export default Navbar;
