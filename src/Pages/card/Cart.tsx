@@ -46,7 +46,7 @@ function Cart() {
     <div className="bg-gray-900 min-h-screen flex items-center justify-center py-6">
       <Container>
         <div className="bg-gray-800 shadow-lg rounded-lg p-4 md:p-6 lg:p-8">
-          <h2 className="text-3xl font-bold text-gold text-center mb-4">
+          <h2 className="text-3xl font-bold text-white text-right mb-6">
             سبد خرید
           </h2>
           <div className="space-y-4">
