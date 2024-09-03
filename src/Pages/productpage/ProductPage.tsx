@@ -51,7 +51,10 @@ function ProductPage() {
                     className="w-full mt-2"
                     variant="primary"
                     onClick={() =>
-                      handleIncreaseProductQty(parseInt(params.id as string))
+                      handleIncreaseProductQty(
+                        parseInt(params.id as string),
+                        product!.price
+                      )
                     }
                   >
                     Add to Cart
