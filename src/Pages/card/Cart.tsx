@@ -1,34 +1,3 @@
-// import Button from "../../Components/button/Button";
-// import CartItem from "../../Components/cartitem/CartItem";
-// import Container from "../../Components/Navbar/container/Container";
-// import { useShoppingCartContext } from "../../contex/ShoppingCartContext";
-
-// function Cart() {
-//   const { cartItems } = useShoppingCartContext();
-
-//   return (
-//     <div>
-//       <Container>
-//         <div className="">
-//           {cartItems.map((item) => (
-//             <CartItem {...item} />
-//           ))}
-//         </div>
-//         <div className="text-right bg-slate-200 p-4">
-//           <p>قیمت کل:2000 تومان</p>
-//           <p>تخفیف شما:200 تومان</p>
-//           <p>قیمت نهایی:1800 تومان</p>
-//         </div>
-
-//         <Button className="mt-2" variant="success">
-//           ثبت سفارش
-//         </Button>
-//       </Container>
-//     </div>
-//   );
-// }
-// export default Cart;
-
 import Button from "../../Components/button/Button";
 import CartItem from "../../Components/cartitem/CartItem";
 import Container from "../../Components/Navbar/container/Container";
@@ -37,10 +6,14 @@ import { useShoppingCartContext } from "../../contex/ShoppingCartContext";
 function Cart() {
   const { cartItems } = useShoppingCartContext();
 
-  // You can calculate total, discount, and final price dynamically based on cartItems
-  const totalPrice = 2000; // Replace with dynamic total
-  const discount = 200; // Replace with dynamic discount
-  const finalPrice = totalPrice - discount;
+  // Calculate total price and other metrics
+  const totalPrice = cartItems.reduce((total, item) => {
+    return total + item.price * item.qty; // Calculate using price and quantity
+  }, 0);
+
+  const discountRate = 0.1; // 10% discount
+  const discount = totalPrice * discountRate; // Calculate discount
+  const finalPrice = Math.max(totalPrice - discount, 0); // Ensure final price is not negative
 
   return (
     <div className="bg-gray-900 min-h-screen flex items-center justify-center py-6">
@@ -56,13 +29,13 @@ function Cart() {
           </div>
           <div className="mt-4 text-right bg-gray-700 text-white p-4 rounded-lg">
             <p className="text-sm md:text-base">
-              قیمت کل: <span>{totalPrice} تومان</span>
+              قیمت کل: <span>{totalPrice.toLocaleString()} تومان</span>
             </p>
             <p className="text-sm md:text-base">
-              تخفیف شما: <span>{discount} تومان</span>
+              تخفیف شما: <span>{discount.toLocaleString()} تومان</span>
             </p>
             <p className="font-bold text-lg md:text-xl">
-              قیمت نهایی: <span>{finalPrice} تومان</span>
+              قیمت نهایی: <span>{finalPrice.toLocaleString()} تومان</span>
             </p>
           </div>
           <Button className="mt-6 w-full bg-gold text-gray-900 py-2 rounded hover:bg-yellow-600 transition duration-200">
