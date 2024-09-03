@@ -8,11 +8,12 @@ interface ShoppingCartProvider {
 interface CartItem {
   id: number;
   qty: number;
+  price: number;
 }
 
 interface ShoppingCartContext {
   cartItems: CartItem[];
-  handleIncreaseProductQty: (id: number) => void;
+  handleIncreaseProductQty: (id: number, price: number) => void;
   handleDecreaseProductQty: (id: number) => void;
   getProductQty: (id: number) => number;
   handleRemoveProduct: (id: number) => void;
@@ -36,11 +37,11 @@ export function ShoppingCartProvider({ children }: ShoppingCartProvider) {
 
   // // const [cartItems1, setCartItems1] = useLocalStorage<CartItem[]>("CartItems",[] );
 
-  const handleIncreaseProductQty = (id: number) => {
+  const handleIncreaseProductQty = (id: number, price: number) => {
     setCartItems((currentItems) => {
       let selectedItem = currentItems.find((item) => item.id == id);
       if (selectedItem == null) {
-        return [...currentItems, { id: id, qty: 1 }];
+        return [...currentItems, { id: id, qty: 1, price }];
       } else {
         return currentItems.map((item) => {
           if (item.id == id) {
